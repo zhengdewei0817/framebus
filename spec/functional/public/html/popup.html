@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    popup.html
+    <input id="from-popup-message" />
+    <button id="send">Send</button>
+    <script src="/js/test-app.js"></script>
+    <script>
+      var bus = new Framebus();
+
+      bus.on("message", function (data) {
+        app.printToDOM(data.message);
+      });
+
+      document.querySelector("#send").addEventListener(
+        "click",
+        function () {
+          bus.emit("from-popup", {
+            message: document.querySelector("#from-popup-message").value,
+          });
+        },
+        false
+      );
+
+      var count = 0;
+      bus.on("from-popup", function () {
+        count++;
+
+        if (count > 1) {
+          app.printToDOM('FAILURE received "from-popup" multiple times');
+        }
+      });
+
+      var countFromTop = 0;
+      bus.on("from-top", function (data) {
+        countFromTop++;
+
+        if (countFromTop > 1) {
+          app.printToDOM('FAILURE received "from-top" multiple times');
+        } else {
+          app.printToDOM(data.message);
+        }
+      });
+    </script>
+  </body>
+</html>

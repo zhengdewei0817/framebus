@@ -1,0 +1,22 @@
+{
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "no-unused-expressions": 0,
+    "func-style": 0,
+    "no-invalid-this": 0,
+    "no-useless-call": 0
+  },
+  "globals": {
+    "$$": true,
+    "$": true,
+    "browser": true,
+    "Promise": true,
+    "mkFrame": true,
+    "mkWindow": true,
+    "messagePrefix": true,
+    "bus": false,
+    "scope": false
+  }
+}
